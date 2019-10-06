@@ -1,8 +1,9 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx } from 'type-graphql'
+import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware } from 'type-graphql'
 import { hash, compare } from 'bcryptjs'
 import { User } from '../entity/User'
-import { createAccesToken } from '../auth/auth'
+import { createAccesToken, createRefreshAccesToken } from '../auth/auth'
 import { MyContext } from '../context'
+import { isAuth } from '../auth/isAuth'
 
 @ObjectType()
 class LoginResponse {
@@ -20,6 +21,14 @@ export class UserResolver {
     @Query(() => [User])
     users() {
         return User.find()
+    }
+
+    @Query(() => String)
+    @UseMiddleware(isAuth)
+    seeYa(
+        @Ctx() { payload }: MyContext
+    ) {
+        return `See ya number ${payload!.userId}`
     }
 
     @Mutation(() => Boolean)
@@ -64,7 +73,7 @@ export class UserResolver {
 
         res.cookie(
             'podcast',
-            createAccesToken(user),
+            createRefreshAccesToken(user),
             {
                 httpOnly: true
             }            

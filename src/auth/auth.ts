@@ -13,13 +13,13 @@ export const createAccesToken = (user: User): string => {
     )
 }
 
-export const refreshAccesToken = (user: User): string => {
+export const createRefreshAccesToken = (user: User): string => {
     return (
         sign(
             {
             userId: user.id},
             process.env.REFRESH_TOKEN_SECRET!,
-            { expiresIn: '1min' }
+            { expiresIn: '7d' }
         )
     )
 }
