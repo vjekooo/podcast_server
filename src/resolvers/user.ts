@@ -1,4 +1,5 @@
 import { Resolver, Query, Mutation, Arg } from 'type-graphql'
+import { User } from 'src/entity/User'
 
 @Resolver()
 export class UserResolver {
@@ -8,10 +9,15 @@ export class UserResolver {
     }
 
     @Mutation()
-    register(
+    async register(
         @Arg('email') email: string,
         @Arg('password') password: string
     ) {
+
+        await User.insert({
+            email,
+            password
+        })
         return
     }
 }
