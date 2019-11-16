@@ -17,7 +17,9 @@ export const createRefreshAccesToken = (user: User): string => {
     return (
         sign(
             {
-            userId: user.id},
+                userId: user.id,
+                tokenVersion: user.tokenVersion
+            },
             process.env.REFRESH_TOKEN_SECRET!,
             { expiresIn: '7d' }
         )

@@ -57,6 +57,15 @@ import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
             )
         }
 
+        if (user.tokenVersion !== payload.tokenVersion) {
+            return (
+                res.send({
+                    ok: false,
+                    accessToken: ''
+                })
+            )
+        }
+
         res.cookie(
             'podcast',
             createRefreshAccesToken(user),
