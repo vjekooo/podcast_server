@@ -1,4 +1,13 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware } from 'type-graphql'
+import {
+    Resolver,
+    Query,
+    Mutation,
+    Arg,
+    ObjectType,
+    Field,
+    Ctx,
+    UseMiddleware
+} from 'type-graphql'
 import { hash, compare } from 'bcryptjs'
 import { User } from '../entity/User'
 import { createAccesToken, createRefreshAccesToken } from '../auth/auth'
@@ -14,21 +23,11 @@ class LoginResponse {
 @Resolver()
 export class UserResolver {
     @Query(() => String)
-    hello() {
-        return 'hi'
-    }
-
-    @Query(() => [User])
-    users() {
-        return User.find()
-    }
-
-    @Query(() => String)
     @UseMiddleware(isAuth)
-    seeYa(
+    user(
         @Ctx() { payload }: MyContext
     ) {
-        return `See ya number ${payload!.userId}`
+        return payload!.userId
     }
 
     @Mutation(() => Boolean)
