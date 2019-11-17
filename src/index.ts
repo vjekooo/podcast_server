@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import express from 'express'
+import cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./resolvers/userResolver";
@@ -13,9 +14,19 @@ import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
 (async () => {
     const app = express()
 
+    app.use(cors({
+        origin: 'http://localhost:3000',
+        credentials: true
+    }))
+
     app.get('/', (_req, res) => res.send('hello'))
 
     app.post('/refresh_token', async (req, res) => {
+
+        const falseObject = {
+            ok: false,
+            accessToken: ''
+        }
        
         if (!req.headers.cookie) {
             return
@@ -25,10 +36,7 @@ import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
 
         if (!token) {
             return (
-                res.send({
-                    ok: false,
-                    accessToken: ''
-                })
+                res.send(falseObject)
             )
         }
 
@@ -39,10 +47,7 @@ import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
         } catch (error) {
             console.log(error)
             return (
-                res.send({
-                    ok: false,
-                    accessToken: ''
-                })
+                res.send(falseObject)
             )
         }
 
@@ -50,19 +55,13 @@ import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
 
         if (!user) {
             return (
-                res.send({
-                    ok: false,
-                    accessToken: ''
-                })
+                res.send(falseObject)
             )
         }
 
         if (user.tokenVersion !== payload.tokenVersion) {
             return (
-                res.send({
-                    ok: false,
-                    accessToken: ''
-                })
+                res.send(falseObject)
             )
         }
 
@@ -91,7 +90,7 @@ import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
         context: ({ req, res }) => ({ req, res })
     })
 
-    apolloServer.applyMiddleware({ app })
+    apolloServer.applyMiddleware({ app, cors: false })
 
 
     app.listen(4000, () => {
