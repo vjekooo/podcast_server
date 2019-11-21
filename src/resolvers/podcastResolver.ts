@@ -2,19 +2,24 @@ import {
     Resolver,
     Mutation,
     Arg,
-    Query
+    Query,
+    UseMiddleware,
+    Ctx
 } from 'type-graphql'
 import { Podcast } from '../entity/Podcast'
 import { User } from '../entity/User'
+import { isAuth } from '../auth/isAuth'
+import { MyContext } from '../context'
 
 @Resolver()
 export class PodcastResolver {
     @Query(() => [Podcast])
+    @UseMiddleware(isAuth)
     async podcasts(
-        @Arg('userId') userId: number
+        @Ctx() { payload }: MyContext
     ) {
         const user = await User.findOne(
-            userId,
+            payload!.userId,
             { relations: ['podcasts'] }
         )
 
@@ -26,16 +31,17 @@ export class PodcastResolver {
     }
 
     @Mutation(() => Boolean)
+    @UseMiddleware(isAuth)
     async subscribe(
         @Arg('url') url: string,
-        @Arg('userId') userId: number
+        @Ctx() { payload }: MyContext
     ) {
 
-        const user = await User.findOne({ where: {id: userId} })
+        const user = await User.findOne({ where: {id: payload!.userId} })
 
-        console.log(user)
-
-        if (!user) return
+        if (!user) {
+            throw new Error('No user')
+        }
 
         const podcast = new Podcast()
         podcast.url = url
