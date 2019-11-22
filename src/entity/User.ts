@@ -8,6 +8,7 @@ import {
 import { ObjectType, Field, Int } from "type-graphql";
 
 import { Podcast } from './Podcast'
+import { Favorite } from './Favorite'
 
 @ObjectType()
 @Entity('users')
@@ -29,4 +30,7 @@ export class User extends BaseEntity {
 
     @OneToMany(_type => Podcast, podcast => podcast.user)
     podcasts: Podcast[];
+
+    @OneToMany(_type => Favorite, favorite => favorite.user)
+    favorites: Favorite[];
 }

@@ -11,6 +11,7 @@ import { User } from "./entity/User";
 import { parseCookie } from './parseCookie'
 import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
 import { PodcastResolver } from "./resolvers/podcastResolver";
+import { FavoriteResolver } from "./resolvers/favoriteResolver";
 
 (async () => {
     const app = express()
@@ -86,7 +87,7 @@ import { PodcastResolver } from "./resolvers/podcastResolver";
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver, PodcastResolver]
+            resolvers: [UserResolver, PodcastResolver, FavoriteResolver]
         }),
         context: ({ req, res }) => ({ req, res })
     })
