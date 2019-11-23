@@ -4,7 +4,8 @@ import {
     Arg,
     Query,
     UseMiddleware,
-    Ctx
+    Ctx,
+    ID
 } from 'type-graphql'
 import { Favorite } from '../entity/Favorite'
 import { User } from '../entity/User'
@@ -54,5 +55,20 @@ export class FavoriteResolver {
         favorite.save()
 
         return true
+    }
+
+    @Mutation(() => Boolean)
+    @UseMiddleware(isAuth)
+    async removeFavorite(
+        @Arg('id', () => ID) id: number,
+    ) {
+        const result = await Favorite.delete({ id })
+
+        if (result.affected === 0) {
+            throw new Error('No episode found')
+        }
+
+        return true
+
     }
 }

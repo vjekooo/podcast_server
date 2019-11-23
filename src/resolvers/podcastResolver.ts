@@ -51,4 +51,27 @@ export class PodcastResolver {
 
         return true
     }
+
+    @Mutation(() => Boolean)
+    @UseMiddleware(isAuth)
+    async unsubscribe(
+        @Arg('url') url: string,
+    ) {
+        const podcast = await Podcast.findOne({ where: {url: url} })
+
+        if (!podcast) {
+            throw new Error('Nope')
+        }
+
+        const id = podcast.id
+
+        const result = await Podcast.delete({ id })
+
+        if (result.affected === 0) {
+            throw new Error('No episode found')
+        }
+
+        return true
+
+    }
 }

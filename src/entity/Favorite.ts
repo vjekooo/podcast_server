@@ -6,12 +6,12 @@ import {
     ManyToOne
 } from "typeorm";
 import { User } from './User'
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 
 @ObjectType()
 @Entity('favorites')
 export class Favorite extends BaseEntity {
-    @Field(() => Int)
+    @Field(() => ID)
     @PrimaryGeneratedColumn()
     id: number;
 
