@@ -34,6 +34,7 @@ export class FavoriteResolver {
     @UseMiddleware(isAuth)
     async setFavorite(
         @Arg('title') title: string,
+        @Arg('description') description: string,
         @Arg('url') url: string,
         @Ctx() { payload }: MyContext
     ) {
@@ -46,6 +47,7 @@ export class FavoriteResolver {
 
         const favorite = new Favorite()
         favorite.title = title
+        favorite.description = description
         favorite.url = url
         favorite.user = user
 
