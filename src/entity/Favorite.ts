@@ -27,6 +27,14 @@ export class Favorite extends BaseEntity {
     @Column()
     url: string;
 
+    @Field()
+    @Column()
+    duration: string;
+
+    @Field()
+    @Column()
+    pubDate: string;
+
     @ManyToOne(_type => User, user => user.favorites)
     user: User;
 }
