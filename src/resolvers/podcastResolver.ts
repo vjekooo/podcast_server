@@ -17,7 +17,7 @@ export class PodcastResolver {
     @UseMiddleware(isAuth)
     async podcasts(
         @Ctx() { payload }: MyContext
-    ) {
+    ): Promise<Podcast[]> {
         const user = await User.findOne(
             payload!.userId,
             { relations: ['podcasts'] }
@@ -35,7 +35,7 @@ export class PodcastResolver {
     async subscribe(
         @Arg('url') url: string,
         @Ctx() { payload }: MyContext
-    ) {
+    ): Promise<Boolean> {
 
         const user = await User.findOne({ where: {id: payload!.userId} })
 
@@ -56,7 +56,7 @@ export class PodcastResolver {
     @UseMiddleware(isAuth)
     async unsubscribe(
         @Arg('url') url: string,
-    ) {
+    ): Promise<Boolean> {
         const podcast = await Podcast.findOne({ where: {url: url} })
 
         if (!podcast) {
@@ -72,6 +72,5 @@ export class PodcastResolver {
         }
 
         return true
-
     }
 }

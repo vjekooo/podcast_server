@@ -12,6 +12,7 @@ import { parseCookie } from './parseCookie'
 import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
 import { PodcastResolver } from "./resolvers/podcastResolver";
 import { FavoriteResolver } from "./resolvers/favoriteResolver";
+import { FetchResolver } from "./resolvers/fetchResolver";
 
 (async () => {
     const app = express()
@@ -87,7 +88,12 @@ import { FavoriteResolver } from "./resolvers/favoriteResolver";
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver, PodcastResolver, FavoriteResolver]
+            resolvers: [
+                UserResolver,
+                PodcastResolver,
+                FavoriteResolver,
+                FetchResolver
+            ]
         }),
         context: ({ req, res }) => ({ req, res })
     })
