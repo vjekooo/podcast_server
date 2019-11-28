@@ -28,5 +28,5 @@ export class PodcastType {
 	@Field()
 	image: string;
 	@Field(() => [EpisodeType])
-	episodes: EpisodeType[];
+	episodes?: EpisodeType[];
 }
