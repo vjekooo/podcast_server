@@ -39,10 +39,10 @@ export class FetchResolver {
 		return podcasts
 	}
 
-	@Query(() => [PodcastType])
+	@Query(() => PodcastType)
 	@UseMiddleware(isAuth)
-	async fetchPodcastsEpisodes(
-		@Arg('urls', _type => [String]) urls: string[]
+	async fetchPodcastEpisodes(
+		@Arg('url') url: string
 	) {
 
 		const template = {
@@ -59,18 +59,14 @@ export class FetchResolver {
 			}]
 		}
 
-		const podcasts = await urls.map(async (url: string) => {
-			const response = await fetch(url)
+		const response = await fetch(url)
 
-			const data = await response.text()
-	
-			const parsed = await transform(data, template)
+		const data = await response.text()
 
-			parsed.url = url
+		const parsed = await transform(data, template)
 
-			return parsed
-		});
+		parsed.url = url
 
-		return podcasts
+		return parsed
 	}
 }
