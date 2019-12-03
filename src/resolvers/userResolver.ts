@@ -13,6 +13,7 @@ import { User } from '../entity/User'
 import { createAccesToken, createRefreshAccesToken } from '../auth/auth'
 import { MyContext } from '../context'
 import { isAuth } from '../auth/isAuth'
+import { verify } from 'jsonwebtoken'
 
 @ObjectType()
 class LoginResponse {
@@ -81,5 +82,31 @@ export class UserResolver {
         return {
             accessToken: createAccesToken(user)
         }
+    }
+
+    @Mutation(() => Boolean)
+    @UseMiddleware(isAuth)
+    async logout(
+        @Arg('token') token: string,
+        @Ctx() { res }: MyContext
+    ) {
+
+        const decoded: any = verify(token, process.env.ACCESS_TOKEN_SECRET!)
+
+        if (!decoded) {
+            throw new Error('No token')
+        }
+
+        const id = decoded.userId
+
+        const user = await User.findOne({ where: { id }})
+
+        if (!user) {
+            throw new Error('No user')
+        }
+
+        res.clearCookie('podcast')
+
+        return true
     }
 }

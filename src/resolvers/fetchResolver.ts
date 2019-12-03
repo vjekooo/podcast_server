@@ -14,10 +14,8 @@ export class FetchResolver {
 	@Query(() => [PodcastType])
 	@UseMiddleware(isAuth)
 	async fetchPodcasts(
-		@Arg('url') url: string
+		@Arg('urls', _type => [String]) urls: string[]
 	) {
-
-		const urls = JSON.parse(url)
 
 		const template = {
 			title: '//title',
@@ -26,14 +24,14 @@ export class FetchResolver {
 			image: '//image/url'
 		}
 
-		const podcasts = await Object.keys(urls).map(async (key: string) => {
-			const response = await fetch(urls[key])
+		const podcasts = await urls.map(async (url: string) => {
+			const response = await fetch(url)
 
 			const data = await response.text()
-	
+
 			const parsed = await transform(data, template)
 
-			parsed.url = urls[key]
+			parsed.url = url
 
 			return parsed
 		});
@@ -44,10 +42,8 @@ export class FetchResolver {
 	@Query(() => [PodcastType])
 	@UseMiddleware(isAuth)
 	async fetchPodcastsEpisodes(
-		@Arg('url') url: string
+		@Arg('urls', _type => [String]) urls: string[]
 	) {
-
-		const urls = JSON.parse(url)
 
 		const template = {
 			title: '//title',
@@ -63,14 +59,14 @@ export class FetchResolver {
 			}]
 		}
 
-		const podcasts = await Object.keys(urls).map(async (key: string) => {
-			const response = await fetch(urls[key])
+		const podcasts = await urls.map(async (url: string) => {
+			const response = await fetch(url)
 
 			const data = await response.text()
 	
 			const parsed = await transform(data, template)
 
-			parsed.url = urls[key]
+			parsed.url = url
 
 			return parsed
 		});
