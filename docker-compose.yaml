@@ -1,0 +1,13 @@
+
+version: "3.7"
+services: 
+    db:
+        image: postgres
+        environment: 
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_USER: vjeko
+            POSTGRES_DB: podcast
+        volumes: 
+            - ./pgdata:/var/lib/postgressql/data
+        ports:
+            - '5432:5432'
