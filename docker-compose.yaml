@@ -1,6 +1,6 @@
 
 version: "3.7"
-services: 
+services:
     db:
         image: postgres
         environment: 
@@ -11,3 +11,7 @@ services:
             - ./pgdata:/var/lib/postgressql/data
         ports:
             - '5432:5432'
+    server:
+        build: .
+        ports: 
+            - '4000:4000'
