@@ -1,5 +1,5 @@
 
-version: "3.7"
+version: "3"
 services:
     db:
         image: postgres
@@ -13,5 +13,6 @@ services:
             - '5432:5432'
     server:
         build: .
+        image: podcast_server:latest
         ports: 
             - '4000:4000'
