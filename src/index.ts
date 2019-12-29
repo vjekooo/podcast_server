@@ -83,19 +83,8 @@ import { FetchResolver } from "./resolvers/fetchResolver";
             })
         )
     })
-
-    let retires = 5
-    while(retires) {
-        try {
-            await createConnection()
-            break
-        } catch (error) {
-            console.log(error)
-            retires -= 1
-            await new Promise(res => setTimeout(res, 5000))
-        }
-    }
-
+   
+    await createConnection()
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({

@@ -3,16 +3,18 @@ version: "3"
 services:
     db:
         image: postgres
-        environment: 
+        environment:
             POSTGRES_PASSWORD: 1234
             POSTGRES_USER: vjeko
             POSTGRES_DB: podcast
-        volumes: 
+        volumes:
             - ./pgdata:/var/lib/postgressql/data
         ports:
             - '5432:5432'
     server:
         build: .
         image: podcast_server:latest
-        ports: 
+        ports:
             - '4000:4000'
+        depends_on:
+            - db
