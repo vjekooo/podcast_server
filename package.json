@@ -28,6 +28,7 @@
    },
    "scripts": {
       "start": "nodemon --exec ts-node src/index.ts",
-      "build": "tsc -b"
+      "build": "tsc -b",
+      "debug": "node --inspect-brk ts-node src/index.ts"
    }
 }

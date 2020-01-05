@@ -1,18 +1,18 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 import express from 'express'
 import cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
-import { buildSchema } from "type-graphql";
-import { UserResolver } from "./resolvers/userResolver";
-import { createConnection } from "typeorm";
-import { verify } from "jsonwebtoken";
-import { User } from "./entity/User";
+import { buildSchema } from 'type-graphql';
+import { createConnection } from 'typeorm';
+import { verify } from 'jsonwebtoken';
 
+import { User } from './entity/User';
 import { parseCookie } from './parseCookie'
-import { createAccesToken, createRefreshAccesToken } from "./auth/auth";
-import { PodcastResolver } from "./resolvers/podcastResolver";
-import { FavoriteResolver } from "./resolvers/favoriteResolver";
-import { FetchResolver } from "./resolvers/fetchResolver";
+import { createAccesToken, createRefreshAccesToken } from './auth/auth';
+import { UserResolver } from './resolvers/userResolver';
+import { PodcastResolver } from './resolvers/podcastResolver';
+import { FavoriteResolver } from './resolvers/favoriteResolver';
+import { FetchResolver } from './resolvers/fetchResolver';
 
 (async () => {
     const app = express()
