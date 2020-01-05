@@ -1,7 +1,7 @@
 --- 
   files: 
     - 
-      destination: /home/
+      destination: /home/ubuntu/podcast/
       source: /
   hooks: 
     ApplicationStart: 
