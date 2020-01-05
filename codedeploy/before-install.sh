@@ -1,0 +1,2 @@
+
+mkdir /home/ubuntu/podcast/
