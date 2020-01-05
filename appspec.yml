@@ -6,9 +6,9 @@
   hooks: 
     ApplicationStart: 
       - 
-        location: /codedeploy/application_start.sh  
+        location: /codedeploy/start_server.sh  
     BeforeInstall: 
       - 
-        location: /codedeploy/before_install.sh
+        location: /codedeploy/install_dependencies.sh
   os: linux
   version: 0.0

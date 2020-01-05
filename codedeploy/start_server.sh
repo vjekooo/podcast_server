@@ -1,5 +1,5 @@
 #!/bin/bash
-# Start up the web server.
+# Start up the server
 
 cd /home/ubuntu/podcast/
 
