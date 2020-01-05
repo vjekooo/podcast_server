@@ -6,10 +6,7 @@
   hooks: 
     ApplicationStart: 
       - 
-        location: /codedeploy/application_start.sh
-    ApplicationStop: 
-      - 
-        location: /codedeploy/application_stop.sh
+        location: /codedeploy/application_start.sh  
     BeforeInstall: 
       - 
         location: /codedeploy/before_install.sh
