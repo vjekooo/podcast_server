@@ -1,4 +1,4 @@
 #!/bin/bash
 # Before installing
 
-mkdir /home/ubuntu/podcast/
+mkdir -p /home/ubuntu/podcast/
