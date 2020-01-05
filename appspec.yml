@@ -4,6 +4,9 @@
       destination: /home/ubuntu/podcast/
       source: /
   hooks: 
+    ApplicationStop:
+      -
+        location: /codedeploy/stop_server.sh
     ApplicationStart: 
       - 
         location: /codedeploy/start_server.sh  
