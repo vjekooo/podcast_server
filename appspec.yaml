@@ -1,3 +1,2 @@
 version: 0.0
-    os: linux
-    runas: root
+os: linux
