@@ -1,12 +1,12 @@
 version: 0.0
 os: linux
 files:
-    - source: /
-    destination: /home/ubuntu/podcast/
+  - source: /
+  destination: /home/ubuntu/podcast/
 hooks:
-    ApplicationStop:
-        - location: /codedeploy/application_stop.sh
-    BeforeInstall:
-        - location: /codedeploy/before_install.sh
-    ApplicationStart:
-        - location: /codedeploy/application_start.sh
+  ApplicationStop:
+    - location: /codedeploy/application_stop.sh
+  BeforeInstall:
+    - location: /codedeploy/before_install.sh
+  ApplicationStart:
+    - location: /codedeploy/application_start.sh
