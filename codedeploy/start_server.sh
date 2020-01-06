@@ -3,4 +3,4 @@
 
 cd /home/ubuntu/podcast/server
 
-docker-compose up -d
+docker-compose up -d --build
