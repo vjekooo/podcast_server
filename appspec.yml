@@ -1,7 +1,7 @@
 --- 
   files: 
     - 
-      destination: /home/ubuntu/podcast/
+      destination: /home/ubuntu/podcast/server/
       source: /
   hooks: 
     ApplicationStop:
