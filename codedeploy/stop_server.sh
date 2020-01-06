@@ -3,4 +3,8 @@
 
 cd /home/ubuntu/podcast/server
 
-docker-compose stop
+file="/docker-compose.yaml"
+if [ -f "$file" ]
+then
+    docker-compose stop
+fi
