@@ -7,11 +7,14 @@
     ApplicationStop:
       -
         location: /codedeploy/stop_server.sh
+        timeout: 180
     ApplicationStart: 
       - 
-        location: /codedeploy/start_server.sh  
+        location: /codedeploy/start_server.sh
+        timeout: 180
     BeforeInstall: 
       - 
         location: /codedeploy/install_dependencies.sh
+        timeout: 180
   os: linux
   version: 0.0
