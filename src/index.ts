@@ -18,7 +18,11 @@ import { FetchResolver } from './resolvers/fetchResolver';
     const app = express()
 
     app.use(cors({
-        origin: ['http://localhost', 'http://localhost:3000'],
+        origin: [
+            'http://localhost',
+            'http://localhost:3000',
+            'ec2-63-32-44-201.eu-west-1.compute.amazonaws.com'
+        ],
         credentials: true
     }))
 
