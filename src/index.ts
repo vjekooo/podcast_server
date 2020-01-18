@@ -23,8 +23,7 @@ import { FetchResolver } from './resolvers/fetchResolver';
             'http://localhost:3000',
             'http://0.0.0.0',
             'http://0.0.0.0:3000',
-            'ec2-63-32-44-201.eu-west-1.compute.amazonaws.com',
-            'http://ec2-63-32-44-201.eu-west-1.compute.amazonaws.com'
+            'http://34.242.87.37',
         ],
         credentials: true
     }))
