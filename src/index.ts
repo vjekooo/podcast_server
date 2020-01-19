@@ -21,9 +21,8 @@ import { FetchResolver } from './resolvers/fetchResolver';
         origin: [
             'http://localhost',
             'http://localhost:3000',
-            'http://0.0.0.0',
-            'http://0.0.0.0:3000',
-            'http://34.242.87.37',
+            // 'http://34.242.87.37',
+            // 'http://34.242.87.37:3000',
         ],
         credentials: true
     }))
@@ -107,9 +106,9 @@ import { FetchResolver } from './resolvers/fetchResolver';
     apolloServer.applyMiddleware({ app, cors: false })
 
     // const hostName = process.env.ENV === 'production' ? '0.0.0.0' : 'localhost'
-    const hostName = '0.0.0.0'
+    // const hostName = '0.0.0.0'
 
-    app.listen(4000, hostName, () => {
+    app.listen(4000, () => {
         console.log('Server started on 4000')
     })
 })()
