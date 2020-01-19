@@ -19,10 +19,10 @@ import { FetchResolver } from './resolvers/fetchResolver';
 
     app.use(cors({
         origin: [
-            'http://localhost',
-            'http://localhost:3000',
-            // 'http://34.242.87.37',
-            // 'http://34.242.87.37:3000',
+            // 'http://localhost',
+            // 'http://localhost:3000',
+            'http://34.242.87.37',
+            'http://34.242.87.37:3000',
         ],
         credentials: true
     }))
