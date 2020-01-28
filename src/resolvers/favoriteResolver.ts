@@ -39,6 +39,7 @@ export class FavoriteResolver {
         @Arg('url') url: string,
         @Arg('duration') duration: string,
         @Arg('pubDate') pubDate: string,
+        @Arg('image') image: string,
         @Ctx() { payload }: MyContext
     ) {
 
@@ -55,6 +56,7 @@ export class FavoriteResolver {
         favorite.user = user
         favorite.duration = duration
         favorite.pubDate = pubDate
+        favorite.image = image
 
         favorite.save()
 
