@@ -106,9 +106,9 @@ import { FetchResolver } from './resolvers/fetchResolver';
     apolloServer.applyMiddleware({ app, cors: false })
 
     // const hostName = process.env.ENV === 'production' ? '0.0.0.0' : 'localhost'
-    const hostName = 'localhost'
+    // const hostName = '0.0.0.0'
 
-    app.listen(4000, hostName, () => {
+    app.listen(4000, () => {
         console.log('Server started on 4000')
     })
 })()
