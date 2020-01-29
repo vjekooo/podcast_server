@@ -36,7 +36,7 @@ export class Favorite extends BaseEntity {
     pubDate: string;
 
     @Field()
-    @Column({ default: '' })
+    @Column()
     image: string;
 
     @ManyToOne(_type => User, user => user.favorites)
