@@ -1,18 +1,19 @@
-import 'reflect-metadata';
+import 'reflect-metadata'
 import express from 'express'
 import cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
-import { buildSchema } from 'type-graphql';
-import { createConnection } from 'typeorm';
-import { verify } from 'jsonwebtoken';
+import { buildSchema } from 'type-graphql'
+import { createConnection } from 'typeorm'
+import { verify } from 'jsonwebtoken'
 
-import { User } from './entity/User';
+import { User } from './entity/User'
 import { parseCookie } from './parseCookie'
-import { createAccesToken, createRefreshAccesToken } from './auth/auth';
-import { UserResolver } from './resolvers/userResolver';
-import { PodcastResolver } from './resolvers/podcastResolver';
-import { FavoriteResolver } from './resolvers/favoriteResolver';
-import { FetchResolver } from './resolvers/fetchResolver';
+import { createAccesToken, createRefreshAccesToken } from './auth/auth'
+import { UserResolver } from './resolvers/userResolver'
+import { PodcastResolver } from './resolvers/podcastResolver'
+import { FavoriteResolver } from './resolvers/favoriteResolver'
+import { FetchResolver } from './resolvers/fetchResolver'
+import { SettingsResolver } from './resolvers/settingsResolver'
 
 (async () => {
     const app = express()
@@ -97,7 +98,8 @@ import { FetchResolver } from './resolvers/fetchResolver';
                 UserResolver,
                 PodcastResolver,
                 FavoriteResolver,
-                FetchResolver
+                FetchResolver,
+                SettingsResolver
             ]
         }),
         context: ({ req, res }) => ({ req, res })

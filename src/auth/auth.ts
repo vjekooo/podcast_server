@@ -1,6 +1,6 @@
 
 import { sign } from 'jsonwebtoken'
-import { User } from "../entity/User"
+import { User } from '../entity/User'
 
 export const createAccesToken = (user: User): string => {
     return (
