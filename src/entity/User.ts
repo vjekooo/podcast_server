@@ -4,11 +4,13 @@ import {
     Column,
     BaseEntity,
     OneToMany
-} from "typeorm";
-import { ObjectType, Field, Int } from "type-graphql";
+} from 'typeorm'
+import { ObjectType, Field, Int } from 'type-graphql'
+import { IsEmail, IsNotEmpty } from "class-validator";
 
 import { Podcast } from './Podcast'
 import { Favorite } from './Favorite'
+import { Setting } from './Setting'
 
 @ObjectType()
 @Entity('users')
@@ -19,7 +21,9 @@ export class User extends BaseEntity {
     id: number;
 
     @Field()
-    @Column()
+    @Column({ unique: true })
+    @IsEmail({}, { message: 'Incorrect email' })
+    @IsNotEmpty({ message: 'The email is required' })
     email: string;
 
     @Column()
@@ -33,4 +37,7 @@ export class User extends BaseEntity {
 
     @OneToMany(_type => Favorite, favorite => favorite.user)
     favorites: Favorite[];
+
+    @OneToMany(_type => Setting, setting => setting.user)
+    settings: Setting[];
 }

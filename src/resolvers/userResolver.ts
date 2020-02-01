@@ -14,6 +14,7 @@ import { createAccesToken, createRefreshAccesToken } from '../auth/auth'
 import { MyContext } from '../context'
 import { isAuth } from '../auth/isAuth'
 import { verify } from 'jsonwebtoken'
+import { Setting } from '../entity/Setting'
 
 @ObjectType()
 class LoginResponse {
@@ -23,12 +24,18 @@ class LoginResponse {
 
 @Resolver()
 export class UserResolver {
-    @Query(() => String)
+    @Query(() => [Setting])
     @UseMiddleware(isAuth)
-    user(
+    async user(
         @Ctx() { payload }: MyContext
     ) {
-        return payload!.userId
+
+        const user = await User.findOne(
+            payload!.userId,
+            { relations: ['settings'] }
+        )
+
+        return user?.settings
     }
 
     @Mutation(() => Boolean)

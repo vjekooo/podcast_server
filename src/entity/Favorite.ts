@@ -4,9 +4,9 @@ import {
     Column,
     BaseEntity,
     ManyToOne
-} from "typeorm";
+} from 'typeorm'
 import { User } from './User'
-import { ObjectType, Field, ID } from "type-graphql";
+import { ObjectType, Field, ID } from 'type-graphql'
 
 @ObjectType()
 @Entity('favorites')
