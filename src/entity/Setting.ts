@@ -3,7 +3,8 @@ import {
     PrimaryGeneratedColumn,
     Column,
     BaseEntity,
-    ManyToOne
+    ManyToOne,
+    JoinColumn
 } from 'typeorm'
 import { User } from './User'
 import { ObjectType, Field, ID } from 'type-graphql'
@@ -20,5 +21,6 @@ export class Setting extends BaseEntity {
     theme: string;
 
     @ManyToOne(_type => User, user => user.settings)
+    @JoinColumn({ name: "userId" })
     user: User;
 }
