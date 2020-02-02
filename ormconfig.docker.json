@@ -2,7 +2,7 @@
     "type": "postgres",
     "host": "db",
     "port": 5432,
-    "username": "vjeko",
+    "username": "postgres",
     "password": "1234",
     "database": "podcast",
     "synchronize": false,
