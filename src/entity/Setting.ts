@@ -20,6 +20,8 @@ export class Setting extends BaseEntity {
     @Column({ default: 'light' })
     theme: string;
 
+    @Column()
+    userId: number;
     @ManyToOne(_type => User, user => user.settings)
     @JoinColumn({ name: "userId" })
     user: User;

@@ -17,38 +17,34 @@ export class SettingsResolver {
     async setTheme(
         @Arg('theme') theme: string,
         @Ctx() { payload }: MyContext
-    ): Promise<boolean | string> {
+    ): Promise<boolean> {
 
         console.log(theme)
 
-        const user = await User.findOne(
-            payload!.userId,
-            { relations: ['settings'] }
-        )
+        try {
+            const user = await User.findOne(payload!.userId)
 
-        if (!user) {
-            throw new Error('This is not the user you are looking for')
-        }
+            if (!user) {
+                throw new Error('This is not the user you are looking for')
+            }
 
-        let themeToUpdate = await Setting.findOne({ where: { userId: payload?.userId }})
+            let themeToUpdate = await Setting.findOne({ where: { userId: payload?.userId }})
 
-        const newTheme = themeToUpdate?.theme === 'light'
+            if (!themeToUpdate) {
+                throw new Error('No such thing here')
+            }
+            
+            const newTheme = themeToUpdate?.theme === 'light'
             ? 'dark'
             : 'light'
 
-        if (!themeToUpdate) {
-            throw new Error('No such thing here')
-        }
-
-        try {
             themeToUpdate.theme = newTheme
-    
-            await Setting.save(themeToUpdate)
 
-            return newTheme
+            await Setting.save(themeToUpdate)
         } catch (error) {
            console.log(error)
            return false
         }
+        return true
     }
 }

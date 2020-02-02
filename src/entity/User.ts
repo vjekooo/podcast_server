@@ -6,7 +6,7 @@ import {
     OneToMany
 } from 'typeorm'
 import { ObjectType, Field, Int } from 'type-graphql'
-import { IsEmail, IsNotEmpty } from "class-validator";
+// import { IsEmail, IsNotEmpty } from 'class-validator'
 
 import { Podcast } from './Podcast'
 import { Favorite } from './Favorite'
@@ -21,9 +21,10 @@ export class User extends BaseEntity {
     id: number;
 
     @Field()
-    @Column({ unique: true })
-    @IsEmail({}, { message: 'Incorrect email' })
-    @IsNotEmpty({ message: 'The email is required' })
+    // @Column({ unique: true })
+    @Column()
+    // @IsEmail({}, { message: 'Incorrect email' })
+    // @IsNotEmpty({ message: 'The email is required' })
     email: string;
 
     @Column()
@@ -39,5 +40,5 @@ export class User extends BaseEntity {
     favorites: Favorite[];
 
     @OneToMany(_type => Setting, setting => setting.user)
-    settings: Setting[];
+    settings: Setting;
 }
