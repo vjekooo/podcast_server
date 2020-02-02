@@ -5,7 +5,7 @@ services:
         image: postgres
         environment:
             POSTGRES_PASSWORD: 1234
-            POSTGRES_USER: vjeko
+            POSTGRES_USER: root
             POSTGRES_DB: podcast
         volumes:
             - ./pgdata:/var/lib/postgressql/data
