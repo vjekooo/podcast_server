@@ -3,10 +3,11 @@ import {
     PrimaryGeneratedColumn,
     Column,
     BaseEntity,
-    OneToMany
+    OneToMany,
+    AfterInsert
 } from 'typeorm'
 import { ObjectType, Field, Int } from 'type-graphql'
-// import { IsEmail, IsNotEmpty } from 'class-validator'
+import { IsEmail, IsNotEmpty } from 'class-validator'
 
 import { Podcast } from './Podcast'
 import { Favorite } from './Favorite'
@@ -21,10 +22,10 @@ export class User extends BaseEntity {
     id: number;
 
     @Field()
-    // @Column({ unique: true })
+    @Column({ unique: true })
     @Column()
-    // @IsEmail({}, { message: 'Incorrect email' })
-    // @IsNotEmpty({ message: 'The email is required' })
+    @IsEmail({}, { message: 'Incorrect email' })
+    @IsNotEmpty({ message: 'The email is required' })
     email: string;
 
     @Column()
@@ -41,4 +42,13 @@ export class User extends BaseEntity {
 
     @OneToMany(_type => Setting, setting => setting.user)
     settings: Setting;
+
+    @AfterInsert()
+    async createSettings(): Promise<void> {
+        const setting = new Setting()
+        setting.theme = 'light'
+        setting.user = this
+
+        setting.save()
+    }
 }

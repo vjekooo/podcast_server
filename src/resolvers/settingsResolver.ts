@@ -33,7 +33,7 @@ export class SettingsResolver {
             if (!themeToUpdate) {
                 throw new Error('No such thing here')
             }
-            
+
             const newTheme = themeToUpdate?.theme === 'light'
             ? 'dark'
             : 'light'
