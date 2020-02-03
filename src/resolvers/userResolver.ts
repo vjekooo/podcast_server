@@ -47,17 +47,12 @@ export class UserResolver {
         const hashedPassword = await hash(password, 12)
 
         try {
-            const user = await User.insert({
+            const user = User.create({
                 email,
                 password: hashedPassword
             })
-            if (user) {
-                const setting = new Setting()
-                setting.theme = 'light'
-                setting.userId = user.identifiers[0].id
 
-                setting.save()
-            }
+            await user.save()
         } catch (error) {
             console.log(error)
             return false
