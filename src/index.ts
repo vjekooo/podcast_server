@@ -9,11 +9,13 @@ import { verify } from 'jsonwebtoken'
 import { User } from './entity/User'
 import { parseCookie } from './parseCookie'
 import { createAccesToken, createRefreshAccesToken } from './auth/auth'
+
 import { UserResolver } from './resolvers/userResolver'
 import { PodcastResolver } from './resolvers/podcastResolver'
 import { FavoriteResolver } from './resolvers/favoriteResolver'
 import { FetchResolver } from './resolvers/fetchResolver'
 import { SettingsResolver } from './resolvers/settingsResolver'
+import { FriendsResolver } from './resolvers/friendsResolver'
 
 (async () => {
     const app = express()
@@ -99,7 +101,8 @@ import { SettingsResolver } from './resolvers/settingsResolver'
                 PodcastResolver,
                 FavoriteResolver,
                 FetchResolver,
-                SettingsResolver
+                SettingsResolver,
+                FriendsResolver
             ]
         }),
         context: ({ req, res }) => ({ req, res })

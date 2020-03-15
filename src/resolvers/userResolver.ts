@@ -15,6 +15,7 @@ import { MyContext } from '../context'
 import { isAuth } from '../auth/isAuth'
 import { verify } from 'jsonwebtoken'
 import { Setting } from '../entity/Setting'
+import { getConnection } from 'typeorm'
 
 @ObjectType()
 class LoginResponse {
@@ -24,9 +25,20 @@ class LoginResponse {
 
 @Resolver()
 export class UserResolver {
+    @Query(() => User)
+    @UseMiddleware(isAuth)
+    async userProfile(
+        @Ctx() { payload }: MyContext
+    ) {
+
+        const user = await User.findOne(payload!.userId)
+
+        return user
+    }
+
     @Query(() => [Setting])
     @UseMiddleware(isAuth)
-    async user(
+    async userSettings(
         @Ctx() { payload }: MyContext
     ) {
 
@@ -36,6 +48,24 @@ export class UserResolver {
         )
 
         return user?.settings
+    }
+
+    @Query(() => [User])
+    @UseMiddleware(isAuth)
+    async fetchUsers(
+        @Arg('searchTerm') searchTerm: string,
+        @Ctx() { payload }: MyContext
+    ): Promise<User[]> {
+
+        const users = await getConnection()
+            .getRepository(User)
+            .createQueryBuilder()
+            .select()
+            .where('email ILIKE :searchTerm', {searchTerm: `%${searchTerm}%`})
+            .andWhere('id NOT IN (:id)', {id: payload?.userId})
+            .getMany()
+
+        return users
     }
 
     @Mutation(() => Boolean)
