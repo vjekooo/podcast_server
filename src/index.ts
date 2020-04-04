@@ -20,13 +20,12 @@ import { FriendsResolver } from './resolvers/friendsResolver'
 (async () => {
     const app = express()
 
+    const URL = process.env.NODE_ENV === 'development'
+    ? process.env.CORS_DEV
+    : process.env.CORS_PROD
+
     app.use(cors({
-        origin: [
-            'http://localhost',
-            'http://localhost:3000',
-            // 'http://34.242.87.37',
-            // 'http://34.242.87.37:3000',
-        ],
+        origin: [`${URL}`, `${URL}:3000`],
         credentials: true
     }))
 
