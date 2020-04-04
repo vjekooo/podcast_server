@@ -12,6 +12,9 @@ import { IsEmail, IsNotEmpty } from 'class-validator'
 import { Podcast } from './Podcast'
 import { Favorite } from './Favorite'
 import { Setting } from './Setting'
+import { FriendRequest } from './FriendRequest'
+import { Friend } from './Friends'
+import { History } from './History'
 
 @ObjectType()
 @Entity('users')
@@ -42,6 +45,15 @@ export class User extends BaseEntity {
 
     @OneToMany(_type => Setting, setting => setting.user)
     settings: Setting;
+
+    @OneToMany(_type => FriendRequest, requests => requests.user)
+    requests: FriendRequest[];
+
+    @OneToMany(_type => Friend, friends => friends.user)
+    friends: Friend[];
+
+    @OneToMany(_type => History, history => history.user)
+    history: History[];
 
     @AfterInsert()
     async createSettings(): Promise<void> {

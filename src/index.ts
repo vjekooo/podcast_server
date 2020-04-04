@@ -9,22 +9,23 @@ import { verify } from 'jsonwebtoken'
 import { User } from './entity/User'
 import { parseCookie } from './parseCookie'
 import { createAccesToken, createRefreshAccesToken } from './auth/auth'
+
 import { UserResolver } from './resolvers/userResolver'
 import { PodcastResolver } from './resolvers/podcastResolver'
 import { FavoriteResolver } from './resolvers/favoriteResolver'
 import { FetchResolver } from './resolvers/fetchResolver'
 import { SettingsResolver } from './resolvers/settingsResolver'
+import { FriendsResolver } from './resolvers/friendsResolver'
 
 (async () => {
     const app = express()
 
+    const URL = process.env.NODE_ENV === 'development'
+    ? process.env.CORS_DEV
+    : process.env.CORS_PROD
+
     app.use(cors({
-        origin: [
-            // 'http://localhost',
-            // 'http://localhost:3000',
-            'http://34.242.87.37',
-            'http://34.242.87.37:3000',
-        ],
+        origin: [`${URL}`, `${URL}:3000`],
         credentials: true
     }))
 
@@ -99,7 +100,8 @@ import { SettingsResolver } from './resolvers/settingsResolver'
                 PodcastResolver,
                 FavoriteResolver,
                 FetchResolver,
-                SettingsResolver
+                SettingsResolver,
+                FriendsResolver
             ]
         }),
         context: ({ req, res }) => ({ req, res })
