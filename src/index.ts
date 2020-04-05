@@ -21,8 +21,8 @@ import { FriendsResolver } from './resolvers/friendsResolver'
     const app = express()
 
     const URL = process.env.NODE_ENV === 'development'
-    ? process.env.CORS_DEV
-    : process.env.CORS_PROD
+        ? process.env.CORS_DEV
+        : process.env.CORS_PROD
 
     app.use(cors({
         origin: [`${URL}`, `${URL}:3000`],
