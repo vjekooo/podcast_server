@@ -25,7 +25,7 @@ import { FriendsResolver } from './resolvers/friendsResolver'
         : process.env.CORS_PROD
 
     app.use(cors({
-        origin: [`${URL}`, `${URL}:3000`],
+        origin: URL,
         credentials: true
     }))
 
