@@ -6,15 +6,15 @@
   hooks: 
     ApplicationStop:
       -
-        location: /codedeploy/stop_server.sh
+        location: /scripts/applicationStop.sh
         timeout: 180
     ApplicationStart: 
       - 
-        location: /codedeploy/start_server.sh
+        location: /scripts/applicationStart.sh
         timeout: 180
     BeforeInstall: 
       - 
-        location: /codedeploy/install_dependencies.sh
+        location: /scripts/beforeInstall.sh
         timeout: 180
   os: linux
   version: 0.0
