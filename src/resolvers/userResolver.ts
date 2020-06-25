@@ -71,10 +71,18 @@ export class UserResolver {
     @Mutation(() => Boolean)
     async register(
         @Arg('email') email: string,
-        @Arg('password') password: string
+        @Arg('password') password: string,
+        @Ctx() { payload }: MyContext
     ) {
 
+        const userAlreadyExists = await User.findOne(payload?.userId)
+
+        if (userAlreadyExists) {
+            throw new Error('User already exists')
+        }
+
         const hashedPassword = await hash(password, 12)
+
 
         try {
             const user = User.create({
@@ -84,8 +92,7 @@ export class UserResolver {
 
             await user.save()
         } catch (error) {
-            console.log(error)
-            return false
+            throw new Error('Error registering new user')
         }
 
         return true

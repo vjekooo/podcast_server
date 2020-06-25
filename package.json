@@ -1,40 +1,42 @@
 {
-   "name": "server",
-   "version": "0.0.1",
-   "description": "Podcast player server",
-   "scripts": {
-      "dev": "NODE_ENV=development nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
-      "prod": "NODE_ENV=production nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
-      "build": "tsc -b",
-      "debug": "node --inspect-brk ts-node src/index.ts"
-   },
-   "devDependencies": {
-      "@types/bcryptjs": "^2.4.2",
-      "@types/express": "^4.17.2",
-      "@types/jsonwebtoken": "^8.3.7",
-      "@types/node": "^13.5.1",
-      "@types/node-fetch": "^2.5.4",
-      "nodemon": "^2.0.2",
-      "ts-node": "8.6.2",
-      "typescript": "3.7.5"
-   },
-   "dependencies": {
-      "apollo-server-express": "^2.9.16",
-      "bcryptjs": "^2.4.3",
-      "camaro": "^4.1.2",
-      "cors": "^2.8.5",
-      "dotenv": "^8.2.0",
-      "express": "^4.17.1",
-      "graphql": "^14.6.0",
-      "jsonwebtoken": "^8.5.1",
-      "node-fetch": "^2.6.0",
-      "pg": "^7.18.0",
-      "reflect-metadata": "^0.1.13",
-      "tslib": "1.11.2",
-      "type-graphql": "^0.17.6",
-      "typeorm": "0.2.22"
-   },
-   "resolutions": {
-      "tslib": "1.11.2"
-   }
+	"name": "server",
+	"version": "0.0.1",
+	"description": "Podcast player server",
+	"scripts": {
+		"dev": "NODE_ENV=development nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
+		"prod": "NODE_ENV=production nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
+		"build": "tsc -b",
+		"debug": "node --inspect-brk ts-node src/index.ts",
+		"lint": "eslint --fix --ext .ts ."
+	},
+	"devDependencies": {
+		"@types/bcryptjs": "^2.4.2",
+		"@types/express": "^4.17.2",
+		"@types/jsonwebtoken": "^8.3.7",
+		"@types/node": "^13.5.1",
+		"@types/node-fetch": "^2.5.4",
+		"nodemon": "^2.0.2",
+		"prettier": "^2.0.5",
+		"ts-node": "8.6.2",
+		"typescript": "3.7.5"
+	},
+	"dependencies": {
+		"apollo-server-express": "^2.9.16",
+		"bcryptjs": "^2.4.3",
+		"camaro": "^4.1.2",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"graphql": "^14.6.0",
+		"jsonwebtoken": "^8.5.1",
+		"node-fetch": "^2.6.0",
+		"pg": "^7.18.0",
+		"reflect-metadata": "^0.1.13",
+		"tslib": "1.11.2",
+		"type-graphql": "^0.17.6",
+		"typeorm": "0.2.22"
+	},
+	"resolutions": {
+		"tslib": "1.11.2"
+	}
 }
