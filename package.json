@@ -20,7 +20,7 @@
 		"typescript": "3.7.5"
 	},
 	"dependencies": {
-		"apollo-server-express": "^2.9.16",
+		"apollo-server-express": "^2.14.2",
 		"bcryptjs": "^2.4.3",
 		"camaro": "^4.1.2",
 		"cors": "^2.8.5",
