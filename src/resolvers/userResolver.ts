@@ -47,10 +47,10 @@ export class UserResolver {
 	}
 
 	@Mutation(() => Boolean)
-	async register(@Arg('email') email: string, @Arg('password') password: string, @Ctx() { payload }: MyContext) {
-		const userAlreadyExists = await User.findOne(payload?.userId)
+	async register(@Arg('email') email: string, @Arg('password') password: string) {
+		const userAlreadyExists = await User.find({ where: {email}})
 
-		if (userAlreadyExists) {
+		if (userAlreadyExists.length) {
 			throw new Error('User already exists')
 		}
 
