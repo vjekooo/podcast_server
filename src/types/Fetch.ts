@@ -1,32 +1,31 @@
-
-import { ObjectType, Field } from "type-graphql";
+import { ObjectType, Field } from 'type-graphql'
 
 @ObjectType()
 export class EpisodeType {
 	@Field()
-	title: string;
+	title: string
 	@Field()
-	pubDate: string;
+	pubDate: string
 	@Field()
-	description: string;
+	description: string
 	@Field()
-	url: string;
+	url: string
 	@Field()
-	duration: string;
+	duration: string
 }
 
 @ObjectType()
 export class PodcastType {
 	@Field()
-	url: string;
+	url: string
 	@Field()
-	title: string;
+	title: string
 	@Field()
-	pubDate: string;
+	pubDate: string
 	@Field()
-	description: string;
+	description: string
 	@Field()
-	image: string;
+	image: string
 	@Field(() => [EpisodeType])
-	episodes?: EpisodeType[];
+	episodes?: EpisodeType[]
 }

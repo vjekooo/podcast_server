@@ -1,20 +1,19 @@
-
-version: "3"
+version: '3'
 services:
-    db:
-        image: postgres
-        environment:
-            POSTGRES_PASSWORD: 1234
-            POSTGRES_USER: postgres
-            POSTGRES_DB: podcast
-        volumes:
-            - ./pgdata:/var/lib/postgressql/data
-        ports:
-            - '5432:5432'
-    server:
-        build: .
-        image: podcast_server:latest
-        ports:
-            - '4000:4000'
-        depends_on:
-            - db
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: postgres
+      POSTGRES_DB: podcast
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  server:
+    build: .
+    image: podcast_server:latest
+    ports:
+      - '4000:4000'
+    depends_on:
+      - db
