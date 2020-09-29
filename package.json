@@ -4,7 +4,7 @@
 	"description": "Podcast player server",
 	"scripts": {
 		"dev": "NODE_ENV=development nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
-		"prod": "NODE_ENV=production nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
+		"start": "NODE_ENV=production nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
 		"build": "tsc -b",
 		"debug": "node --inspect-brk ts-node src/index.ts"
 	},
