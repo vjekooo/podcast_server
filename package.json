@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "NODE_ENV=development nodemon --exec ts-node --require 'dotenv/config' src/index.ts",
 		"start": "NODE_ENV=production ts-node --require 'dotenv/config' src/index.ts",
-		"build": "tsc -b",
+		"build": "tsc --project tsconfig.json",
 		"debug": "node --inspect src/index.ts"
 	},
 	"devDependencies": {
