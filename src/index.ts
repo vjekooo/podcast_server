@@ -17,7 +17,7 @@ import { FetchResolver } from './resolvers/fetchResolver'
 import { SettingsResolver } from './resolvers/settingsResolver'
 import { FriendsResolver } from './resolvers/friendsResolver'
 
-;(async () => {
+(async () => {
 	const app = express()
 
 	const URL = process.env.NODE_ENV === 'development' ? process.env.CORS_DEV : process.env.CORS_PROD
