@@ -20,7 +20,7 @@ import { FriendsResolver } from './resolvers/friendsResolver'
 (async () => {
 	const app = express()
 
-	const URL = process.env.NODE_ENV === 'development' ? process.env.CORS_DEV : process.env.CORS_PROD
+	const URL = process.env.CORS_URL
 
 	app.use(
 		cors({
