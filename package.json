@@ -33,7 +33,7 @@
 		"reflect-metadata": "^0.1.13",
 		"tslib": "1.11.2",
 		"type-graphql": "^0.17.6",
-		"typeorm": "0.2.22"
+		"typeorm": "0.2.25"
 	},
 	"resolutions": {
 		"tslib": "1.11.2"
